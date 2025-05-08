@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:46:27 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/08 19:35:06 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:35:10 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_handle_nl(char *buffer, char *new_line)
 {
@@ -68,17 +68,17 @@ char	*ft_read_loop(char *buffer, char *new_line, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FD_LIMIT][BUFFER_SIZE + 1];
 	char		*new_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	new_line = NULL;
-	if (buffer[0] != '\0')
-		new_line = ft_join_free(new_line, buffer);
-	if (ft_locate_nl(buffer) >= 0)
-		return (ft_handle_nl(buffer, new_line));
-	new_line = ft_read_loop(buffer, new_line, fd);
-	new_line = ft_handle_nl(buffer, new_line);
+	if (buffer[fd][0] != '\0')
+		new_line = ft_join_free(new_line, buffer[fd]);
+	if (ft_locate_nl(buffer[fd]) >= 0)
+		return (ft_handle_nl(buffer[fd], new_line));
+	new_line = ft_read_loop(buffer[fd], new_line, fd);
+	new_line = ft_handle_nl(buffer[fd], new_line);
 	return (new_line);
 }
