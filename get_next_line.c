@@ -6,13 +6,13 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:46:27 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/06/18 17:31:04 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/09 20:14:03 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_handle_nl(char *buffer, char *new_line)
+char	*ft_handle_nl(char *buffer, char *new_line)
 {
 	char	*final_line;
 	int		nl_index;	
@@ -36,11 +36,11 @@ static char	*ft_handle_nl(char *buffer, char *new_line)
 		final_line = new_line;
 	ft_memmove_nl(buffer);
 	if (nl_index >= 0)
-		free (new_line);
+		free(new_line);
 	return (final_line);
 }
 
-static char	*ft_read_loop(char *buffer, char *new_line, int fd)
+char	*ft_read_loop(char *buffer, char *new_line, int fd)
 {
 	ssize_t	bytes_read;
 
